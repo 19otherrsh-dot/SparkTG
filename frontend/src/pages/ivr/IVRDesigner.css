@@ -1,0 +1,280 @@
+.ivr-designer {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 20px;
+}
+
+.designer-container {
+  flex: 1;
+  display: flex;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  min-height: 600px;
+}
+
+.designer-sidebar {
+  width: 250px;
+  background-color: var(--bg-card);
+  border-right: 1px solid var(--border-color);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  z-index: 5;
+}
+
+.sidebar-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.node-palette {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.palette-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: grab;
+  transition: all 0.2s;
+}
+
+.palette-item:active {
+  cursor: grabbing;
+}
+
+.palette-item:hover {
+  border-color: var(--primary-500);
+  background-color: var(--bg-hover);
+}
+
+.palette-item.play { border-left: 4px solid var(--primary-500); }
+.palette-item.collect { border-left: 4px solid var(--warning-500); }
+.palette-item.branch { border-left: 4px solid var(--success-500); }
+.palette-item.transfer { border-left: 4px solid var(--primary-500); }
+.palette-item.http { border-left: 4px solid var(--warning-500); }
+.palette-item.hangup { border-left: 4px solid var(--danger-500); }
+
+.reactflow-wrapper {
+  flex: 1;
+  height: 100%;
+  background-color: var(--bg-main);
+}
+
+/* React Flow Overrides for Theme */
+.react-flow-canvas .react-flow__controls {
+  box-shadow: var(--shadow-md);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.react-flow-canvas .react-flow__controls-button {
+  background-color: var(--bg-card);
+  border-bottom: 1px solid var(--border-color);
+  color: var(--text-primary);
+  fill: var(--text-primary);
+}
+
+.react-flow-canvas .react-flow__controls-button:hover {
+  background-color: var(--bg-hover);
+}
+
+[data-theme='dark'] .react-flow-canvas .react-flow__background {
+  background-color: var(--bg-main);
+}
+
+.properties-panel {
+  flex: 1;
+  border-top: 1px solid var(--border-color);
+  padding-top: 20px;
+}
+
+/* ==============================
+   IVR SIMULATOR MODAL
+   ============================== */
+.simulator-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.simulator-phone {
+  width: 340px;
+  height: 650px;
+  background-color: var(--bg-main);
+  border-radius: 40px;
+  border: 8px solid var(--bg-card);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.phone-notch {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120px;
+  height: 25px;
+  background-color: var(--bg-card);
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+  z-index: 10;
+}
+
+.phone-header {
+  padding: 40px 20px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--bg-card);
+}
+
+.phone-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: var(--text-primary);
+}
+
+.phone-status {
+  font-size: 0.8rem;
+  color: var(--success-500);
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.phone-status.ended {
+  color: var(--danger-500);
+}
+
+.phone-screen {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: var(--bg-main);
+}
+
+.log-entry {
+  padding: 12px;
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  animation: bubbleIn 0.3s ease;
+}
+
+.log-entry.system {
+  background-color: var(--bg-hover);
+  color: var(--text-primary);
+  border-left: 3px solid var(--primary-500);
+}
+
+.log-entry.user {
+  background-color: var(--primary-500);
+  color: white;
+  align-self: flex-end;
+  border-radius: var(--radius-md) 0 var(--radius-md) var(--radius-md);
+}
+
+.phone-keypad-container {
+  background-color: var(--bg-card);
+  border-top: 1px solid var(--border-color);
+  padding: 20px;
+}
+
+.phone-keypad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+}
+
+.keypad-btn {
+  background-color: var(--bg-hover);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+  margin: 0 auto;
+  transition: all 0.2s;
+}
+
+.keypad-btn:hover:not(:disabled) {
+  background-color: var(--primary-500);
+  color: white;
+  transform: scale(1.05);
+}
+
+.keypad-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.keypad-sub {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  margin-top: -2px;
+}
+
+.keypad-btn:hover:not(:disabled) .keypad-sub {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.phone-controls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.control-btn {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: white;
+  transition: transform 0.2s;
+}
+
+.control-btn:hover {
+  transform: scale(1.1);
+}
+
+.control-btn.end { background-color: var(--danger-500); }
+.control-btn.submit { background-color: var(--success-500); }
+.control-btn.submit:disabled { background-color: var(--bg-hover); color: var(--text-muted); cursor: not-allowed; transform: none; }

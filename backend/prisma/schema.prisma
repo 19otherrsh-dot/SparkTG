@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  name      String?
+  role      String   @default("AGENT") // AGENT or SUPERVISOR
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model IvrFlow {
+  id          String   @id @default(uuid())
+  name        String
+  description String?
+  nodes       String   // JSON stringified nodes
+  edges       String   // JSON stringified edges
+  isActive    Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Contact {
+  id           String        @id @default(uuid())
+  name         String
+  email        String?       @unique
+  phone        String?       @unique
+  company      String?
+  location     String?
+  interactions Interaction[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Interaction {
+  id             String    @id @default(uuid())
+  type           String    // voice, chat, email
+  status         String    // waiting, active, wrap-up, closed
+  duration       String?
+  intent         String?
+  action         String?
+  tags           String?   // comma-separated
+  customerName   String?
+  customerNumber String?
+  contactId      String?
+  contact        Contact?  @relation(fields: [contactId], references: [id])
+  messages       Message[]
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+}
+
+model Message {
+  id            String      @id @default(uuid())
+  interactionId String
+  interaction   Interaction @relation(fields: [interactionId], references: [id])
+  sender        String      // "agent" or "customer"
+  text          String
+  time          String      // HH:mm format for display
+  createdAt     DateTime    @default(now())
+}
