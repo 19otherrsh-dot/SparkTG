@@ -33,7 +33,9 @@ cp "AI Accountant/backend/.env.example" "AI Accountant/backend/.env"
 
 ```bash
 npm install                        # installs root, frontend and backend (npm workspaces)
-cd backend && npx prisma generate && cd ..
+cd backend
+npx prisma generate                # builds the database client
+cd ..
 npm run dev                        # starts frontend and backend together
 ```
 
